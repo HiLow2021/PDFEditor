@@ -1,0 +1,32 @@
+﻿<Window x:Class="PDFEditor.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PDFEditor.Views"
+        xmlns:vm="clr-namespace:PDFEditor.ViewModels"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance vm:MainWindowViewModel}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        Title="PDFEditor" Height="650" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <materialDesign:ColorZone Mode="Inverted" Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth3">
+            <StackPanel Orientation="Horizontal">
+                <Button Height="40" Content="{materialDesign:PackIcon Kind=FileImport, Size=32}" Style="{DynamicResource MaterialDesignToolForegroundButton}" Command="{Binding LoadCommand}" ToolTip="ファイル読込"/>
+                <Button Height="40" Margin="20,0" Content="{materialDesign:PackIcon Kind=Printer, Size=32}" Style="{DynamicResource MaterialDesignToolForegroundButton}" Command="{Binding PrintCommand}" ToolTip="帳票出力" Cursor="Hand"/>
+                <Button Height="40" Content="{materialDesign:PackIcon Kind=MinusCircle, Size=32}" Style="{DynamicResource MaterialDesignToolForegroundButton}" Command="{Binding ShrinkCommand}" ToolTip="縮小"/>
+                <Button Height="40" Margin="20,0" Content="{materialDesign:PackIcon Kind=PlusCircle, Size=32}" Style="{DynamicResource MaterialDesignToolForegroundButton}" Command="{Binding MagnifyCommand}" ToolTip="拡大"/>
+                <TextBlock FontSize="20" Text="{Binding SheetInformation.ScalePercentage, StringFormat={}{0:F0}%}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <ContentControl Padding="10" prism:RegionManager.RegionName="MainWindowContentRegion" Grid.Row="1"/>
+    </Grid>
+</Window>
